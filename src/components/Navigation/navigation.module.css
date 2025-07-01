@@ -32,6 +32,11 @@
     display: block;
     visibility: visible;
   }
+
+  .nav__menu_hidden {
+    display: none;
+    visibility: hidden;
+  }
   
   .logo__image {
     width: 113.33px;
