@@ -1,8 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
+import classnames from 'classnames';
 
 export default function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className={styles.main__nav}>
       <div className={styles.nav__logo}>
@@ -14,12 +20,19 @@ export default function Navigation() {
           alt={'logo'}
         />
       </div>
-      <div className={styles.nav__burger}>
+      <div
+        className={styles.nav__burger}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
         <span className={styles.burger__line}></span>
       </div>
-      <div className={styles.nav__menu}>
+      <div
+        className={classnames(styles.nav__menu, {
+          [styles.nav__menu_hidden]: !isOpen,
+        })}
+      >
         <ul className={styles.menu__list}>
           <li className={styles.menu__item}>
             <Link href="#" className={styles.menu__link}>
