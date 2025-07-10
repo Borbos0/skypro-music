@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from './track.module.css';
 import { Track as TrackType } from '@/sharedTypes/sharedTypes';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import { setCurrentTrack, setIsPlay } from '@/store/features/trackSlice';
+import { setCurrentTrack } from '@/store/features/trackSlice';
 
 type trackTypeProp = {
   track: TrackType;
@@ -19,7 +19,6 @@ export default function Track({ track }: trackTypeProp) {
 
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
-    dispatch(setIsPlay(true));
   };
 
   return (

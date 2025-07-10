@@ -14,9 +14,23 @@ export default function Bar() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    if (currentTrack) {
+      dispatch(setIsPlay(false));
+      setTimeout(() => dispatch(setIsPlay(true)), 50);
+    }
+  }, [currentTrack, dispatch]);
+
+  useEffect(() => {
     if (!audioRef.current) return;
     if (isPlay) {
-      audioRef.current.play();
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          if (error.name !== 'AbortError') {
+            console.warn('Play error:', error);
+          }
+        });
+      }
     } else {
       audioRef.current.pause();
     }
