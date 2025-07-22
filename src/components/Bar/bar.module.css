@@ -72,6 +72,11 @@
     stroke: #acacac;
     cursor: pointer;
   }
+
+  .btnActive {
+    filter: brightness(1.5);
+    opacity: 1;
+  }
   
   .btnIcon:active svg {
     fill: transparent;
@@ -122,6 +127,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    cursor: pointer;
   }
   
   .player__btnPrev {
