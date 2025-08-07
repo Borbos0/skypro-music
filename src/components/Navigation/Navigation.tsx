@@ -12,13 +12,15 @@ export default function Navigation() {
   return (
     <nav className={styles.main__nav}>
       <div className={styles.nav__logo}>
-        <Image
-          width={250}
-          height={170}
-          className={styles.logo__image}
-          src="/img/logo.png"
-          alt={'logo'}
-        />
+        <Link href="/music/main">
+          <Image
+            width={250}
+            height={170}
+            className={styles.logo__image}
+            src="/img/logo.png"
+            alt={'logo'}
+          />
+        </Link>
       </div>
       <div
         className={styles.nav__burger}
@@ -35,7 +37,7 @@ export default function Navigation() {
       >
         <ul className={styles.menu__list}>
           <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
+            <Link href="/music/main" className={styles.menu__link}>
               Главное
             </Link>
           </li>

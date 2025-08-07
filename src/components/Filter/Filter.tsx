@@ -1,15 +1,19 @@
 import styles from './filter.module.css';
 import FilterItem from '../FilterItem/FilterItem';
 import { getUniqueValueByKey } from '@/utils/helper';
-import { data } from '@/data';
 import { FilterProvider } from '../FilterContext/FilterContext';
+import { Track } from '@/sharedTypes/sharedTypes';
 
-export default function Filter() {
-  const authors = getUniqueValueByKey(data, 'author');
-  const genres = getUniqueValueByKey(data, 'genre');
+interface Props {
+  tracks: Track[];
+}
+
+export default function Filter({ tracks }: Props) {
+  const authors = getUniqueValueByKey(tracks, 'author');
+  const genres = getUniqueValueByKey(tracks, 'genre');
   const years = Array.from(
     new Set(
-      getUniqueValueByKey(data, 'release_date').map(
+      getUniqueValueByKey(tracks, 'release_date').map(
         (date) => date.split('-')[0],
       ),
     ),
