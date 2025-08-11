@@ -76,7 +76,7 @@ export default function SignUp() {
         onChange={onChangeUsername}
       />
       <input
-        className={styles.modal__input}
+        className={classNames(styles.modal__input, styles.login)}
         type="text"
         name="email"
         placeholder="Почта"
@@ -91,7 +91,7 @@ export default function SignUp() {
       />
       <div className={styles.errorContainer}></div>
       <button
-        className={styles.modal__btnSignupEnt}
+        className={styles.modal__btnSignup}
         disabled={isLoading}
         onClick={onSubmit}
       >

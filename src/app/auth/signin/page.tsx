@@ -32,15 +32,19 @@ export default function Signin() {
       return setErrorMessage('Заполните все поля');
     }
     setIsLoading(true);
+    console.log(`email ` + email);
+    console.log(`password ` + password);
 
     authUser({ email, password })
       .then((res) => {
+        console.log(res);
         localStorage.setItem('userId', res._id.toString());
         router.replace('/music/main');
       })
       .catch((error) => {
         if (error instanceof AxiosError) {
           if (error.response) {
+            console.log(error);
             setErrorMessage(error.response.data.message);
           } else if (error.request) {
             setErrorMessage('Что-то с интернетом');
@@ -57,11 +61,11 @@ export default function Signin() {
 
   return (
     <>
-      <a href="/music/main">
+      <Link href="/music/main">
         <div className={styles.modal__logo}>
           <img src="/img/logo_modal.png" alt="logo" />
         </div>
-      </a>
+      </Link>
       <input
         className={classNames(styles.modal__input, styles.login)}
         type="text"
