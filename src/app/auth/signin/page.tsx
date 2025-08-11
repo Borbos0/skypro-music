@@ -32,19 +32,15 @@ export default function Signin() {
       return setErrorMessage('Заполните все поля');
     }
     setIsLoading(true);
-    console.log(`email ` + email);
-    console.log(`password ` + password);
 
     authUser({ email, password })
       .then((res) => {
-        console.log(res);
-        localStorage.setItem('userId', res._id.toString());
+        localStorage.setItem('userId', res.data._id.toString());
         router.replace('/music/main');
       })
       .catch((error) => {
         if (error instanceof AxiosError) {
           if (error.response) {
-            console.log(error);
             setErrorMessage(error.response.data.message);
           } else if (error.request) {
             setErrorMessage('Что-то с интернетом');

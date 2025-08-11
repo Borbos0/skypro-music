@@ -40,7 +40,7 @@ export default function SignUp() {
 
     regUser({ email, password, username })
       .then((res) => {
-        localStorage.setItem('userId', res.result._id.toString());
+        // localStorage.setItem('userId', res.result._id.toString());
         router.replace('/music/main');
       })
       .catch((error) => {

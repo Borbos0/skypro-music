@@ -28,7 +28,7 @@ type regUserReturn = {
 
 export const authUser = (data: authUserProps): Promise<authUserReturn> => {
     return axios.post(BASE_URL + '/user/login',
-        {data},
+        data,
         {headers: {
         'content-type': 'application/json',
     },
@@ -37,7 +37,7 @@ export const authUser = (data: authUserProps): Promise<authUserReturn> => {
 
 export const regUser = (data: regUserProps): Promise<regUserReturn> => {
     return axios.post(BASE_URL + '/user/signup',
-        {data},
+        data,
         {headers: {
         'content-type': 'application/json',
     },
