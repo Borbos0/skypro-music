@@ -281,6 +281,12 @@
     align-items: center;
     margin-left: 26%;
   }
+
+  .trackPlay__actions {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+  }
   
   .trackPlay__like,
   .trackPlay__dislike {
@@ -365,3 +371,21 @@
     position: relative;
     margin-top: -7px;
   }
+
+.liked {
+  animation: like-pulse 0.4s ease;
+  stroke: #ff3b3b;
+  fill: #ff3b3b;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes like-pulse {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.4); }
+  60%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}

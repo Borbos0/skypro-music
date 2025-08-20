@@ -9,11 +9,11 @@ interface Props {
 }
 
 export default function Filter({ tracks }: Props) {
-  const authors = getUniqueValueByKey(tracks, 'author');
-  const genres = getUniqueValueByKey(tracks, 'genre');
+  const authors = getUniqueValueByKey(tracks ?? [], 'author');
+  const genres = getUniqueValueByKey(tracks ?? [], 'genre');
   const years = Array.from(
     new Set(
-      getUniqueValueByKey(tracks, 'release_date').map(
+      getUniqueValueByKey(tracks ?? [], 'release_date').map(
         (date) => date.split('-')[0],
       ),
     ),

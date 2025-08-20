@@ -11,9 +11,11 @@ interface regUserProps extends authUserProps {
 }
 
 type authUserReturn = {
-    email: string;
-    username: string;
-    _id: number;
+    data: {
+        email: string,
+        username: string,
+        _id: number
+    } 
 }
 
 type regUserReturn = {
@@ -25,6 +27,16 @@ type regUserReturn = {
     },
     success: boolean
 }
+
+type accessTokenType = {
+    access: string
+}
+
+type refreshTokenType = {
+    refresh: string
+}
+
+type tokensType = accessTokenType & refreshTokenType;
 
 export const authUser = (data: authUserProps): Promise<authUserReturn> => {
     return axios.post(BASE_URL + '/user/login',
@@ -43,3 +55,11 @@ export const regUser = (data: regUserProps): Promise<regUserReturn> => {
     },
 },
 )}
+
+export const getTokens = (data: authUserProps): Promise<tokensType> => {
+    return axios.post(BASE_URL + '/user/token', data).then((res) => res.data)
+}
+
+export const refreshTokens = (refresh: string): Promise<accessTokenType> => {
+    return axios.post(BASE_URL + '/user/token/refresh', {refresh}).then((res) => res.data)
+}

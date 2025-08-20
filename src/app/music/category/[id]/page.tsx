@@ -52,7 +52,7 @@ export default function CategoryPage() {
 
   return (
     <CenterBlock
-      data={tracks}
+      tracks={tracks}
       isLoading={isLoading}
       title={title}
       error={error}

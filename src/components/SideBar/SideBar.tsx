@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './sideBar.module.css';
 import { useRouter } from 'next/navigation';
+import SideBarUser from '../SideBarUser/SideBarUser';
 
 export default function SideBar() {
   const router = useRouter();
@@ -13,7 +14,8 @@ export default function SideBar() {
   return (
     <div className={styles.main__sidebar}>
       <div className={styles.sidebar__personal}>
-        <p className={styles.sidebar__personalName}>Sergey.Ivanov</p>
+        <SideBarUser />
+        {/* <p className={styles.sidebar__personalName}>Sergey.Ivanov</p> */}
         <div className={styles.sidebar__icon} onClick={logout}>
           <svg>
             <use xlinkHref="/img/icon/sprite.svg#logout"></use>

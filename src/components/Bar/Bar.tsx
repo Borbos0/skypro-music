@@ -12,6 +12,7 @@ import {
   toggleShuffle,
 } from '@/store/features/trackSlice';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { useLikeTrack } from '@/hooks/useLikeTracks';
 
 export default function Bar() {
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
@@ -24,6 +25,13 @@ export default function Bar() {
   const [isLoadedTrack, setIsLoadedTrack] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
+
+  const {
+    isLike,
+    toggleLike,
+    isLoading: likeLoading,
+    errorMsg,
+  } = useLikeTrack(currentTrack);
 
   useEffect(() => {
     if (currentTrack) {
@@ -70,12 +78,7 @@ export default function Bar() {
   };
 
   const onLoadedMetadata = () => {
-    console.log('start');
-    if (audioRef.current) {
-      console.log('play');
-      // audioRef.current.play();
-      // dispatch(setIsPlay(true));
-    }
+    setIsLoadedTrack(true);
   };
 
   const onEnded = () => {
@@ -196,27 +199,25 @@ export default function Bar() {
                   </Link>
                 </div>
               </div>
-              <div className={styles.trackPlay__dislike}>
-                <div
+              <div className={styles.trackPlay__actions}>
+                <svg
                   className={classnames(
-                    styles.player__btnShuffle,
-                    styles.btnIcon,
+                    styles.trackPlay__likeSvg,
+                    isLike && styles.liked,
+                    likeLoading && styles.disabled,
                   )}
+                  role="button"
+                  onClick={() => {
+                    if (!likeLoading) toggleLike();
+                  }}
+                  aria-label={
+                    isLike ? 'Убрать из избранного' : 'Добавить в избранное'
+                  }
                 >
-                  <svg className={styles.trackPlay__likeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                  </svg>
-                </div>
-                <div
-                  className={classnames(
-                    styles.trackPlay__dislike,
-                    styles.btnIcon,
-                  )}
-                >
-                  <svg className={styles.trackPlay__dislikeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                  </svg>
-                </div>
+                  <use
+                    xlinkHref={`/img/icon/sprite.svg#${isLike ? 'icon-like' : 'icon-dislike'}`}
+                  />
+                </svg>
               </div>
             </div>
           </div>

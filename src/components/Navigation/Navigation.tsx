@@ -5,9 +5,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './navigation.module.css';
 import classnames from 'classnames';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { clearUser } from '@/store/features/authSlice';
+import { useRouter } from 'next/navigation';
 
 export default function Navigation() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+
+  const { access } = useAppSelector((state) => state.auth);
+
+  const logout = async () => {
+    dispatch(clearUser());
+    router.push('/music/main');
+  };
 
   return (
     <nav className={styles.main__nav}>
@@ -41,15 +53,23 @@ export default function Navigation() {
               Главное
             </Link>
           </li>
+          {access && (
+            <li className={styles.menu__item}>
+              <Link href="/music/playlist" className={styles.menu__link}>
+                Мой плейлист
+              </Link>
+            </li>
+          )}
           <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
-              Мой плейлист
-            </Link>
-          </li>
-          <li className={styles.menu__item}>
-            <Link href="../signin.html" className={styles.menu__link}>
-              Войти
-            </Link>
+            {access ? (
+              <p className={styles.menu__link} onClick={logout}>
+                Выйти
+              </p>
+            ) : (
+              <Link href="/auth/signin" className={styles.menu__link}>
+                Войти
+              </Link>
+            )}
           </li>
         </ul>
       </div>

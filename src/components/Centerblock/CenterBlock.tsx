@@ -6,14 +6,14 @@ import Track from '../Track/Track';
 import { Track as TrackType } from '@/sharedTypes/sharedTypes';
 
 interface CenterBlockProps {
-  data: TrackType[];
+  tracks: TrackType[];
   isLoading: boolean;
-  title?: string;
-  error?: string;
+  title: string;
+  error: null | string;
 }
 
 export default function CenterBlock({
-  data,
+  tracks,
   isLoading,
   title,
   error,
@@ -21,8 +21,8 @@ export default function CenterBlock({
   return (
     <div className={styles.centerblock}>
       <Search />
-      <h2 className={styles.centerblock__h2}>{title || 'Треки'}</h2>
-      <Filter tracks={data} />
+      <h2 className={styles.centerblock__h2}>{title}</h2>
+      <Filter tracks={tracks} />
       <div className={styles.centerblock__content}>
         <div className={styles.content__title}>
           <div className={classnames(styles.playlistTitle__col, styles.col01)}>
@@ -47,11 +47,11 @@ export default function CenterBlock({
             </div>
           ) : isLoading ? (
             <div className={styles.loadingText}>Загрузка треков...</div>
-          ) : data.length === 0 ? (
+          ) : tracks.length === 0 ? (
             <div className={styles.emptyText}>Нет треков в этой категории</div>
           ) : (
-            data.map((track) => (
-              <Track key={track._id} track={track} playlist={data} />
+            tracks.map((track) => (
+              <Track key={track._id} track={track} playlist={tracks} />
             ))
           )}
         </div>
