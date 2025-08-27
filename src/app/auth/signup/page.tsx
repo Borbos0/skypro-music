@@ -40,8 +40,7 @@ export default function SignUp() {
 
     regUser({ email, password, username })
       .then((res) => {
-        // localStorage.setItem('userId', res.result._id.toString());
-        router.replace('/music/main');
+        router.replace('/auth/signup');
       })
       .catch((error) => {
         if (error instanceof AxiosError) {

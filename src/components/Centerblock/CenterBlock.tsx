@@ -1,15 +1,20 @@
+'use client';
 import classnames from 'classnames';
 import styles from './centerBlock.module.css';
 import Search from '../Search/Search';
 import Filter from '../Filter/Filter';
 import Track from '../Track/Track';
 import { Track as TrackType } from '@/sharedTypes/sharedTypes';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/store/store';
+import { setPagePlaylist } from '@/store/features/trackSlice';
 
 interface CenterBlockProps {
   tracks: TrackType[];
   isLoading: boolean;
   title: string;
   error: null | string;
+  pagePlaylist?: TrackType[];
 }
 
 export default function CenterBlock({
@@ -17,7 +22,16 @@ export default function CenterBlock({
   isLoading,
   title,
   error,
+  pagePlaylist,
 }: CenterBlockProps) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!isLoading && !error) {
+      dispatch(setPagePlaylist(pagePlaylist ?? tracks));
+    }
+  }, [isLoading, error]);
+
   return (
     <div className={styles.centerblock}>
       <Search />
@@ -34,7 +48,7 @@ export default function CenterBlock({
           <div className={classnames(styles.playlistTitle__col, styles.col03)}>
             Альбом
           </div>
-          <div className={(styles.playlistTitle__col, styles.col04)}>
+          <div className={classnames(styles.playlistTitle__col, styles.col04)}>
             <svg className={styles.playlistTitle__svg}>
               <use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
             </svg>
