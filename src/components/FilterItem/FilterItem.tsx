@@ -7,9 +7,16 @@ import classNames from 'classnames';
 interface IFilterItemProps {
   label: string;
   values: string[];
+  onSelect: (value: string) => void;
+  selectedValues?: string[];
 }
 
-export default function FilterItem({ label, values }: IFilterItemProps) {
+export default function FilterItem({
+  label,
+  values,
+  onSelect,
+  selectedValues = [],
+}: IFilterItemProps) {
   const { openItem, setOpenItem } = useFilterContext();
   const isOpen = openItem === label;
 
@@ -32,7 +39,14 @@ export default function FilterItem({ label, values }: IFilterItemProps) {
         <div className={styles.filter__list}>
           <ul className={styles.filter__scroll}>
             {values.map((value) => (
-              <li key={value} className={styles.filter__listItem}>
+              <li
+                key={value}
+                className={classNames(
+                  styles.filter__listItem,
+                  selectedValues?.includes(value) && styles.activeItem,
+                )}
+                onClick={() => onSelect(value)}
+              >
                 {value}
               </li>
             ))}

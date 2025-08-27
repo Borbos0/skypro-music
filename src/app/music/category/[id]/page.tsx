@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import CenterBlock from '@/components/Centerblock/CenterBlock';
 import { getSelectionById, getTracks } from '@/services/tracks/tracksApi';
 import { Track } from '@/sharedTypes/sharedTypes';
+import { useAppSelector } from '@/store/store';
 
 export default function CategoryPage() {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +15,11 @@ export default function CategoryPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('Категория');
   const [error, setError] = useState('');
+  const { filteredTracks, filters } = useAppSelector((state) => state.tracks);
+  const hasFilters = Boolean(
+    filters.authors.length || filters.genres.length || filters.years,
+  );
+  const displayTracks = hasFilters ? filteredTracks : tracks;
 
   useEffect(() => {
     if (!id) return;
@@ -52,7 +58,8 @@ export default function CategoryPage() {
 
   return (
     <CenterBlock
-      tracks={tracks}
+      pagePlaylist={tracks}
+      tracks={displayTracks}
       isLoading={isLoading}
       title={title}
       error={error}
