@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const AudioPlayer = () => {
   const audioRef = useRef(null);
-  // Начальная громкость установлена на 50%
-  const [volume, setVolume] = useState(0.5);
+  // Начальная громкость установлена на 20%
+  const [volume, setVolume] = useState(0.2);
 
   useEffect(() => {
     if (audioRef.current) {

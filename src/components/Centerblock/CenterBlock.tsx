@@ -8,6 +8,11 @@ import { Track as TrackType } from '@/sharedTypes/sharedTypes';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/store/store';
 import { setPagePlaylist } from '@/store/features/trackSlice';
+import {
+  TrackListSkeleton,
+  HeaderSkeleton,
+  FiltersSkeleton,
+} from '../Skeletons';
 
 interface CenterBlockProps {
   tracks: TrackType[];
@@ -35,8 +40,12 @@ export default function CenterBlock({
   return (
     <div className={styles.centerblock}>
       <Search />
-      <h2 className={styles.centerblock__h2}>{title}</h2>
-      <Filter tracks={tracks} />
+      {isLoading ? (
+        <HeaderSkeleton />
+      ) : (
+        <h2 className={styles.centerblock__h2}>{title}</h2>
+      )}
+      {isLoading ? <FiltersSkeleton /> : <Filter tracks={tracks} />}
       <div className={styles.centerblock__content}>
         <div className={styles.content__title}>
           <div className={classnames(styles.playlistTitle__col, styles.col01)}>
@@ -60,7 +69,7 @@ export default function CenterBlock({
               {error || 'Ошибка загрузки треков'}
             </div>
           ) : isLoading ? (
-            <div className={styles.loadingText}>Загрузка треков...</div>
+            <TrackListSkeleton rows={10} />
           ) : tracks.length === 0 ? (
             <div className={styles.emptyText}>Нет треков в этой категории</div>
           ) : (

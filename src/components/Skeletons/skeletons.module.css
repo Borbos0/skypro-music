@@ -1,0 +1,79 @@
+.header {
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filtersItem {
+  width: 140px;
+  height: 36px;
+}
+
+.cover {
+  width: 51px;
+  height: 51px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.title {
+  width: 180px;
+  height: 14px;
+}
+
+.subtitle {
+  width: 120px;
+  height: 12px;
+  margin-top: 6px;
+}
+
+.author {
+  width: 140px;
+  height: 14px;
+}
+
+.album {
+  width: 180px;
+  height: 14px;
+}
+
+.time {
+  width: 28px;
+  height: 12px;
+}
+
+.barImage {
+  width: 51px;
+  height: 51px;
+}
+
+.barAuthor {
+  width: 120px;
+  height: 14px;
+}
+
+.barAlbum {
+  width: 160px;
+  height: 14px;
+}
+
+.sidebarCard {
+  width: 250px;
+  height: 170px;
+  display: block;
+  border-radius: 8px;
+}
+
+.sidebarUser {
+  width: 120px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 6px;
+}

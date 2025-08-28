@@ -17,7 +17,8 @@ export type initialStateType = {
     filters: {
         authors: string[],
         genres: string[],
-        years: string
+        years: string,
+        search: string
     }
 }
 
@@ -37,6 +38,7 @@ const initialState: initialStateType = {
         authors: [],
         genres: [],
         years: '',
+        search: '',
     }
 } 
 
@@ -119,8 +121,12 @@ const trackSlice = createSlice({
             state.filters.years = (state.filters.years === year) ? '' : year;
             state.filteredTracks = applyFilters(state);
         },
+        setFilterSearch: (state, action: PayloadAction<string>) => {
+          state.filters.search = action.payload;
+          state.filteredTracks = applyFilters(state);
+        },
     },
 })
 
-export const {setCurrentTrack, setIsPlay, setCurrentPlaylist, setNextTrack, toggleShuffle, setPrevTrack, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setPagePlaylist, setFilterAuthors, setFilterGenres, setFilterYear} = trackSlice.actions;
+export const {setCurrentTrack, setIsPlay, setCurrentPlaylist, setNextTrack, toggleShuffle, setPrevTrack, setAllTracks, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFetchError, setFetchIsLoading, setPagePlaylist, setFilterAuthors, setFilterGenres, setFilterYear, setFilterSearch} = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

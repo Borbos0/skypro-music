@@ -13,7 +13,10 @@ export default function Home() {
 
   useEffect(() => {
     const currentPlaylist =
-      filters.authors.length || filters.genres.length || Boolean(filters.years)
+      filters.authors.length ||
+      filters.genres.length ||
+      Boolean(filters.years) ||
+      Boolean(filters.search?.trim())
         ? filteredTracks
         : allTracks;
     setPlaylist(currentPlaylist);

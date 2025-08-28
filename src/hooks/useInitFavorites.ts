@@ -10,7 +10,6 @@ export const useInitFavorites = () => {
 
   useEffect(() => {
     if (!access) return;
-    console.log(getFavoriteTracks(access))
     getFavoriteTracks(access)
       .then(tracks => dispatch(setFavoriteTracks(tracks)))
   }, [access, dispatch]);
