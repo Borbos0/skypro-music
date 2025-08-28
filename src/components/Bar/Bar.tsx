@@ -13,6 +13,8 @@ import {
 } from '@/store/features/trackSlice';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { useLikeTrack } from '@/hooks/useLikeTracks';
+import Skeleton from 'react-loading-skeleton';
+import skeleton from '../Skeletons/skeletons.module.css';
 
 export default function Bar() {
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
@@ -133,7 +135,6 @@ export default function Bar() {
           value={currentTime}
           onChange={onChangeProgress}
         />
-        {/* <div className={styles.bar__playerProgress}></div> */}
         <div className={styles.bar__playerBlock}>
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
@@ -184,18 +185,30 @@ export default function Bar() {
             <div className={styles.player__trackPlay}>
               <div className={styles.trackPlay__contain}>
                 <div className={styles.trackPlay__image}>
-                  <svg className={styles.trackPlay__svg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                  </svg>
+                  {currentTrack ? (
+                    <svg className={styles.trackPlay__svg}>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                    </svg>
+                  ) : (
+                    <Skeleton className={skeleton.barImage} />
+                  )}
                 </div>
                 <div className={styles.trackPlay__author}>
                   <Link className={styles.trackPlay__authorLink} href="">
-                    {currentTrack.author}
+                    {currentTrack ? (
+                      currentTrack.author
+                    ) : (
+                      <Skeleton className={skeleton.barAuthor} />
+                    )}
                   </Link>
                 </div>
                 <div className={styles.trackPlay__album}>
                   <Link className={styles.trackPlay__albumLink} href="">
-                    {currentTrack.album}
+                    {currentTrack ? (
+                      currentTrack.album
+                    ) : (
+                      <Skeleton className={skeleton.barAlbum} />
+                    )}
                   </Link>
                 </div>
               </div>

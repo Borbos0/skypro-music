@@ -18,7 +18,10 @@ export default function Playlist() {
 
   useEffect(() => {
     const currentPlaylist =
-      filters.authors.length || filters.genres.length || Boolean(filters.years)
+      filters.authors.length ||
+      filters.genres.length ||
+      Boolean(filters.years) ||
+      Boolean(filters.search?.trim())
         ? filteredTracks
         : favoriteTracks;
     setPlaylist(currentPlaylist);

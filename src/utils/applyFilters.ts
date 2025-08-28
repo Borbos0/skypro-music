@@ -16,5 +16,16 @@ export const applyFilters = (state: initialStateType): Track[] => {
       return year === state.filters.years;
     });
   }
+  if (state.filters.search && state.filters.search.trim()) {
+  const userSearch = state.filters.search.trim().toLowerCase();
+  filteredPlaylist = filteredPlaylist.filter((el) => {
+    const inName = el.name.toLowerCase().includes(userSearch);
+    const inAuthor = el.author.toLowerCase().includes(userSearch);
+    const inAlbum = el.album.toLowerCase().includes(userSearch);
+    const inGenre =
+      Array.isArray(el.genre) && el.genre.some((gen) => gen.toLowerCase().includes(userSearch));
+    return inName || inAuthor || inAlbum || inGenre;
+  });
+}
   return filteredPlaylist;
 };
